@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagramredesigned/PAGES/homepage.dart';
+import 'package:instagramredesigned/PAGES/profilepage.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _HomeState extends State<Home> {
       Center(child: Text("Tab 2")),
       Center(child: Text("Tab 3")),
       Center(child: Text("Tab 4")),
-      Center(child: Text("Tab 5")),
+      Profile()
     ];
 
     final bnbi = <BottomNavigationBarItem>[

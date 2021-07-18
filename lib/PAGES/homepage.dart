@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Image.network(
                               "https://picsum.photos/seed/901/600",
-                              height: 500,
+                              height: 700,
                               width: 500,
                               fit: BoxFit.fill,
                             ),
