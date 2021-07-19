@@ -10,6 +10,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Widget _buildChip(Widget w, String label) {
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+      child: Chip(
+        labelPadding: EdgeInsets.all(2.0),
+        avatar: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          child: w,
+        ),
+        label: Text(
+          label,
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.grey.withOpacity(0.1),
+        elevation: 6.0,
+        shadowColor: Colors.grey[60],
+        padding: EdgeInsets.all(8.0),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,92 +73,109 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                     itemCount: 200,
                     itemBuilder: (BuildContext contex, int i) {
-                      return Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40.0),
-                            topLeft: Radius.circular(40.0),
-                          ),
-                          color: Colors.black,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: const Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: const Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                        ),
-                        height: 300,
-                        width: MediaQuery.of(context).size.width,
-                        child: Stack(
-                          children: [
-                            Image.network(
-                              "https://picsum.photos/seed/901/600",
-                              height: 700,
-                              width: 500,
-                              fit: BoxFit.fill,
+                      return GestureDetector(
+                        onDoubleTap: () {
+                          print("DOUBLE TAPPED ${i}");
+                        },
+                        child: Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(40.0),
+                              topLeft: Radius.circular(40.0),
                             ),
-                            Positioned(
-                                top: 15.0,
-                                left: 15.0,
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      child: FlutterLogo(),
-                                      radius: 15,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Name",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                )),
-                            Positioned(
-                                bottom: 15,
-                                left: 15,
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.thumb_up),
-                                    Text("123",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Icon(Icons.message),
-                                    Text("123",
+                            color: Colors.black,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                offset: const Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 10.0,
+                                spreadRadius: 2.0,
+                              ), //BoxShadow
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: const Offset(0.0, 0.0),
+                                blurRadius: 0.0,
+                                spreadRadius: 0.0,
+                              ), //BoxShadow
+                            ],
+                          ),
+                          height: 300,
+                          width: MediaQuery.of(context).size.width,
+                          child: Stack(
+                            children: [
+                              Image.network(
+                                "https://picsum.photos/seed/901/600",
+                                height: 700,
+                                width: 500,
+                                fit: BoxFit.fill,
+                              ),
+                              Positioned(
+                                  top: 15.0,
+                                  left: 15.0,
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        child: FlutterLogo(),
+                                        radius: 15,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Name",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Icon(Icons.send),
-                                  ],
-                                )),
-                            Positioned(
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  )),
+                              Positioned(
+                                  bottom: 15,
+                                  left: 15,
+                                  child: Row(
+                                    children: [
+                                      _buildChip(
+                                          Icon(
+                                            Icons.thumb_up,
+                                            color: Colors.red,
+                                          ),
+                                          "124"),
+                                      _buildChip(
+                                          Icon(
+                                            Icons.message,
+                                            color: Colors.red,
+                                          ),
+                                          "124"),
+                                      _buildChip(
+                                          Icon(
+                                            Icons.thumb_up,
+                                            color: Colors.red,
+                                          ),
+                                          "124"),
+                                      _buildChip(
+                                          Icon(
+                                            Icons.send,
+                                            color: Colors.red,
+                                          ),
+                                          ""),
+                                    ],
+                                  )),
+                              Positioned(
                                 bottom: 15.0,
                                 right: 15.0,
-                                child: Icon(Icons.save_alt))
-                          ],
+                                child: _buildChip(
+                                    Icon(
+                                      Icons.save_alt,
+                                      color: Colors.red,
+                                    ),
+                                    ""),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     })),
